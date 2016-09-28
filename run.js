@@ -86,21 +86,23 @@ tasks.set('build', () => {
 tasks.set('publish', () => {
   global.DEBUG = process.argv.includes('--debug') || false;
   const s3 = require('s3');
-    return run('build').then(() => new Promise((resolve, reject) => {
-      const client = s3.createClient({
-        s3Options: {
-          region: 'us-west-2',
-          sslEnabled: true,
-        },
-      });
-      const uploader = client.uploadDir({
-        localDir: 'public',
-        deleteRemoved: true,
-        s3Params: { Bucket: 'www.catwalking-react.com' },
-      });
-      uploader.on('error', reject);
-      uploader.on('end', resolve);
-    }));
+  return run('build').then(() => new Promise((resolve, reject) => {
+    const client = s3.createClient({
+      s3Options: {
+        region: 'us-west-2',
+        sslEnabled: true,
+      },
+    });
+    const uploader = client.uploadDir({
+      localDir: 'public',
+      deleteRemoved: true,
+      s3Params: {
+        Bucket: 'www.catwalking-react.com'
+      },
+    });
+    uploader.on('error', reject);
+    uploader.on('end', resolve);
+  }));
 });
 
 //
