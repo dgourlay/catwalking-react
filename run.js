@@ -89,14 +89,14 @@ tasks.set('publish', () => {
     return run('build').then(() => new Promise((resolve, reject) => {
       const client = s3.createClient({
         s3Options: {
-          region: 'us-west-1',
+          region: 'us-west-2',
           sslEnabled: true,
         },
       });
       const uploader = client.uploadDir({
         localDir: 'public',
         deleteRemoved: true,
-        s3Params: { Bucket: 'www.interloop.com' },
+        s3Params: { Bucket: 'www.catwalking-react.com' },
       });
       uploader.on('error', reject);
       uploader.on('end', resolve);
