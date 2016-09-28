@@ -6,9 +6,9 @@ const webpack = require('webpack');
 
 // TODO: Update configuration settings
 const config = {
-  title: 'InterLoop',        // Your website title
-  url: 'https://rsb.kriasoft.com',          // Your website URL
-  trackingID: 'UA-XXXXX-Y',                 // Google Analytics Site's ID
+  title: 'InterLoop', // Your website title
+  url: 'https://rsb.kriasoft.com', // Your website URL
+  trackingID: 'UA-XXXXX-Y', // Google Analytics Site's ID
 };
 
 const tasks = new Map(); // The collection of automation tasks ('clean', 'build', 'publish', etc.)
@@ -24,7 +24,9 @@ function run(task) {
 //
 // Clean up the output directory
 // -----------------------------------------------------------------------------
-tasks.set('clean', () => del(['public/dist/*', '!public/dist/.git'], { dot: true }));
+tasks.set('clean', () => del(['public/dist/*', '!public/dist/.git'], {
+  dot: true,
+}));
 
 //
 // Copy ./index.html into the /public folder
@@ -33,8 +35,14 @@ tasks.set('html', () => {
   const webpackConfig = require('./webpack.config');
   const assets = JSON.parse(fs.readFileSync('./public/dist/assets.json', 'utf8'));
   const template = fs.readFileSync('./public/index.ejs', 'utf8');
-  const render = ejs.compile(template, { filename: './public/index.ejs' });
-  const output = render({ debug: webpackConfig.debug, bundle: assets.main.js, config });
+  const render = ejs.compile(template, {
+    filename: './public/index.ejs',
+  });
+  const output = render({
+    debug: webpackConfig.debug,
+    bundle: assets.main.js,
+    config,
+  });
   fs.writeFileSync('./public/index.html', output, 'utf8');
 });
 
@@ -44,10 +52,17 @@ tasks.set('html', () => {
 tasks.set('sitemap', () => {
   const urls = require('./routes.json')
     .filter(x => !x.path.includes(':'))
-    .map(x => ({ loc: x.path }));
+    .map(x => ({
+      loc: x.path,
+    }));
   const template = fs.readFileSync('./public/sitemap.ejs', 'utf8');
-  const render = ejs.compile(template, { filename: './public/sitemap.ejs' });
-  const output = render({ config, urls });
+  const render = ejs.compile(template, {
+    filename: './public/sitemap.ejs',
+  });
+  const output = render({
+    config,
+    urls,
+  });
   fs.writeFileSync('public/sitemap.xml', output, 'utf8');
 });
 
@@ -97,7 +112,7 @@ tasks.set('publish', () => {
       localDir: 'public',
       deleteRemoved: true,
       s3Params: {
-        Bucket: 'www.catwalking-react.com'
+        Bucket: 'www.catwalking-react.com',
       },
     });
     uploader.on('error', reject);
@@ -125,8 +140,14 @@ tasks.set('start', () => {
       // Generate index.html page
       const bundle = stats.compilation.chunks.find(x => x.name === 'main').files[0];
       const template = fs.readFileSync('./public/index.ejs', 'utf8');
-      const render = ejs.compile(template, { filename: './public/index.ejs' });
-      const output = render({ debug: true, bundle: `/dist/${bundle}`, config });
+      const render = ejs.compile(template, {
+        filename: './public/index.ejs',
+      });
+      const output = render({
+        debug: true,
+        bundle: `/dist/${bundle}`,
+        config,
+      });
       fs.writeFileSync('./public/index.html', output, 'utf8');
 
       // Launch Browsersync after the initial bundling is complete
@@ -134,7 +155,9 @@ tasks.set('start', () => {
       if (++count === 1) {
         bs.init({
           port: process.env.PORT || 3000,
-          ui: { port: Number(process.env.PORT || 3000) + 1 },
+          ui: {
+            port: Number(process.env.PORT || 3000) + 1,
+          },
           server: {
             baseDir: 'public',
             middleware: [
@@ -150,4 +173,4 @@ tasks.set('start', () => {
 });
 
 // Execute the specified task or default one. E.g.: node run build
-run(/^\w/.test(process.argv[2] || '') ? process.argv[2] : 'start' /* default */);
+run(/^\w/.test(process.argv[2] || '') ? process.argv[2] : 'start');  /* default */
