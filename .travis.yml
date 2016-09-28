@@ -12,6 +12,7 @@ addons:
 script:
 - npm run lint
 - npm run test
+- npm run build
 deploy:
   provider: s3
   access_key_id: AKIAIVVWBANYMCIHI6RQ
