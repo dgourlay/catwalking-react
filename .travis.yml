@@ -21,6 +21,7 @@ deploy:
   secret_access_key:
     secure: Hfc1dobf+1FcOVzNz2nlK2yjNSyFOt412PGCFCjvDZpuoSrU/Czs4zcORWVbKly1PvhlwNEMtTXrH7jDNMOPro2q8j2K4ebnthx+5eMT4VT9ubzfwxJXtV9+3OIP0r5ifQo+Bt7KryXOz1c/f5ruXa2ZKps+zYug83PUtyfLdWvO7Tj6DW8zQUhyed3aY3xQh1tjynF1LrOQebXANVugHAcRt1dmOjX5ukhztpelkTaB7Wi87evZgRpvD+NJkQLIOtjjlKeVMwc0sGN7F2PrbfeZosyxNyYEPEuX57zDTVMLs64GqcAgygB/NCfv9B1/KBgoyS+LZSebZBBOZfdkmSWHzY/ODKH7S390Jtb3SKQmYF8TMoY/Mfc2yA9wr6swqnwvWiH2fo2wfaM1FEYS7w92r+1Xj7mt939FFO5Y58y5zeEkynN00OtgGPsqsN1yVj4Xd93FqgKIL4+ZqnWO742U53WGw9aRoj2WcCeV6NocvrgHKu8O2Vd65el+brMgToz1+qR3UC7+9egHHPkCI/3wc9hrEC48tV8+Gl1lDhWCYO/ZRIzNw1bYaUHeznBewf8LTYH7F+J4Szq4QqQVa4R4eoAfa9Zidpyfu0UDKZoNXLlzyuxwPiA3/LJL7ohr8MzD7F0NAqLwvVYV58h0+8l+Svai9ugdste65EImays=
   bucket: 'www.catwalking-react.com'
+  skip_cleanup: true
   local-dir: public
   region: us-west-2
   cache_control: 'max-age=300'
