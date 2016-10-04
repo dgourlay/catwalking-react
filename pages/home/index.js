@@ -1,19 +1,21 @@
 import React from 'react';
-import Layout from '../../components/Layout';
+import Header from '../../components/Header/Header';
+import Footer from '../../components/Footer/Footer';
 import s from './styles.css';
-import { title, html } from './index.md';
 
 class HomePage extends React.Component {
 
   componentDidMount() {
-    document.title = title;
+    document.title = 'InterLoop Homepage';
   }
 
   render() {
     return (
-      <Layout className={s.content}>
-        <div dangerouslySetInnerHTML={{ __html: html }} />
-      </Layout>
+      <div>
+        <Header />
+        <p className={s.content}>Hello World!</p>
+        <Footer />
+      </div>
     );
   }
 
