@@ -7,7 +7,7 @@ const webpack = require('webpack');
 // TODO: Update configuration settings
 const config = {
   title: 'InterLoop', // Your website title
-  url: 'https://rsb.kriasoft.com', // Your website URL
+  url: 'https://s3-us-west-2.amazonaws.com/www.catwalking-react.com', // Your website URL
   trackingID: 'UA-XXXXX-Y', // Google Analytics Site's ID
 };
 
