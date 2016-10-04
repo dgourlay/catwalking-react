@@ -4,7 +4,6 @@ const del = require('del');
 const ejs = require('ejs');
 const webpack = require('webpack');
 
-// TODO: Update configuration settings
 const config = {
   title: 'InterLoop', // Your website title
   url: 'https://s3-us-west-2.amazonaws.com/www.catwalking-react.com', // Your website URL
